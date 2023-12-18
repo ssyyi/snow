@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>snowing</title>
+    <style>
+      body {
+        background: #333;
+      }
+      .snowflake {
+        position: fixed;
+        top: -20px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        /* background-color: #ffffff; */
+        opacity: 0.8;
+        animation: snowfall 10s linear infinite;
+      }
+
+      .snowflake::before,
+      .snowflake::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #ffffff;
+        opacity: 0;
+      }
+
+      .snowflake::before {
+        transform: translateX(8px) rotate(45deg);
+      }
+
+      .snowflake::after {
+        transform: translateX(-8px) rotate(-45deg);
+      }
+
+      @keyframes snowfall {
+        0% {
+          transform: translateY(-20px);
+        }
+        100% {
+          transform: translateY(100vh);
+        }
+      }
+    </style>
+  </head>
+  <body></body>
+  <script>
+    function createSnowflake() {
+      var snowflake = document.createElement("div");
+      snowflake.className = "snowflake";
+      snowflake.innerText = "❄️";
+      document.body.appendChild(snowflake);
+      // 设置随机位置
+      snowflake.style.left = Math.random() * window.innerWidth + "px";
+      // 设置随机动画延迟
+      snowflake.style.animationDelay = Math.random() * 5 + "s";
+      // 移除元素
+      setTimeout(function () {
+        document.body.removeChild(snowflake);
+      }, 10000);
+    }
+
+    // 定时创建雪花
+    setInterval(createSnowflake, 100);
+  </script>
+</html>
